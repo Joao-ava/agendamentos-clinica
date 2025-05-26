@@ -25,7 +25,12 @@ public class ScheduleModel implements Serializable {
 
     private LocalDateTime scheduleDate;
     private String patient;
+    @Transient
     private String doctor;
+
+    @Transient
+    private UsersModel paciente;
+
 
     @Enumerated(EnumType.STRING)
     private Status status;
@@ -81,4 +86,11 @@ public class ScheduleModel implements Serializable {
         this.status = status;
     }
 
+    public UsersModel getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(UsersModel paciente) {
+        this.paciente = paciente;
+    }
 }
