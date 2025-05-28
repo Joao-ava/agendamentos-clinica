@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "TB_SCHEDULE")
 public class ScheduleModel implements Serializable {
-
     @Serial
     private static final long serialVersionUID = 1L;
 
@@ -24,20 +23,21 @@ public class ScheduleModel implements Serializable {
     private Long id;
 
     private LocalDateTime scheduleDate;
-    private String patient;
-    @Transient
-    private String doctor;
 
-    @Transient
-    private UsersModel paciente;
+    @ManyToOne
+    @JoinColumn(name="patient_id", nullable=false)
+    private UsersModel patient;
 
+    @ManyToOne
+    @JoinColumn(name="doctor_id")
+    private UsersModel doctor;
 
     @Enumerated(EnumType.STRING)
     private Status status;
 
     public ScheduleModel() {}
 
-    public ScheduleModel(Long id, LocalDateTime scheduleDate, String patient, String doctor, Status status) {
+    public ScheduleModel(Long id, LocalDateTime scheduleDate, UsersModel patient, UsersModel doctor, Status status) {
         this.id = id;
         this.scheduleDate = scheduleDate;
         this.patient = patient;
@@ -62,19 +62,19 @@ public class ScheduleModel implements Serializable {
         this.scheduleDate = scheduleDate;
     }
 
-    public String getPatient() {
+    public UsersModel getPatient() {
         return patient;
     }
 
-    public void setPatient(String patient) {
+    public void setPatient(UsersModel patient) {
         this.patient = patient;
     }
 
-    public String getDoctor() {
+    public UsersModel getDoctor() {
         return doctor;
     }
 
-    public void setDoctor(String doctor) {
+    public void setDoctor(UsersModel doctor) {
         this.doctor = doctor;
     }
 
@@ -84,13 +84,5 @@ public class ScheduleModel implements Serializable {
 
     public void setStatus(Status status) {
         this.status = status;
-    }
-
-    public UsersModel getPaciente() {
-        return paciente;
-    }
-
-    public void setPaciente(UsersModel paciente) {
-        this.paciente = paciente;
     }
 }

@@ -9,7 +9,7 @@ public class PatientModel extends UsersModel {
     }
 
     public boolean isOwnerSchedule(ScheduleModel schedule) {
-        return this.getId_usuario().equals(schedule.getPaciente().getId_usuario());
+        return this.getId().equals(schedule.getPatient().getId());
     }
 
     public void cancelSchedule(ScheduleModel schedule) {
