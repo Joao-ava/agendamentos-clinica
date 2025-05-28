@@ -1,6 +1,6 @@
 package com.unifor.agendamentos.models;
 
-public class DoctorModel {
+public class DoctorModel extends UsersModel {
 
     public void cancelSchedule(ScheduleModel schedule) {
         schedule.setStatus(ScheduleModel.Status.CANCELADO);
