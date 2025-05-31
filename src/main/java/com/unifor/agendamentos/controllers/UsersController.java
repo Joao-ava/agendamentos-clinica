@@ -4,10 +4,7 @@ import com.unifor.agendamentos.models.UsersModel;
 import com.unifor.agendamentos.services.UsersService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -36,6 +33,19 @@ class UsersController {
     @PostMapping("/save")
     public String save(@ModelAttribute UsersModel user) {
         usersService.add(user);
+        return "redirect:/users";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editForm(@PathVariable Long id, Model model) {
+        UsersModel user = this.usersService.findById(id);
+        model.addAttribute("user", user);
+        return "usersUpdate";
+    }
+
+    @PostMapping("/{id}/update")
+    public String edit(@PathVariable Long id, @ModelAttribute UsersModel user) {
+        usersService.update(id, user);
         return "redirect:/users";
     }
 }
