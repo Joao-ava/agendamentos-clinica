@@ -39,6 +39,7 @@
             <th>Nome</th>
             <th>E-mail</th>
             <th>Editar</th>
+            <th>Cargo</th>
         </tr>
         </thead>
         <tbody>
@@ -46,6 +47,7 @@
             <td th:text="${user.id}"></td>
             <td th:text="${user.name}"></td>
             <td th:text="${user.email}"></td>
+            <td th:text="${user.getRoleLabel()}"></td>
             <td>
                 <a th:href="@{/users/edit/{id}(id=${user.id})}" class="btn btn-warning btn-sm">Editar</a>
             </td>

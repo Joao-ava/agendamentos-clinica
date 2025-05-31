@@ -124,4 +124,15 @@ public class UsersModel implements Serializable, UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    public String getRoleLabel() {
+        switch (role) {
+            case DOCTOR:
+                return "Médico";
+            case RECEPTIONIST:
+                return "Recepcionista";
+            default:
+                return "Paciente";
+        }
+    }
 }
