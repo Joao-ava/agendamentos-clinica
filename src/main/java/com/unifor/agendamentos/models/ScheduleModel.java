@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "TB_SCHEDULE")
@@ -34,6 +36,9 @@ public class ScheduleModel implements Serializable {
 
     @Enumerated(EnumType.STRING)
     private Status status;
+
+    @OneToMany(mappedBy = "schedule", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Exam> exams = new ArrayList<>();
 
     public ScheduleModel() {}
 
@@ -84,5 +89,17 @@ public class ScheduleModel implements Serializable {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public List<Exam> getExams() {
+        return exams;
+    }
+
+    public void setExams(List<Exam> exams) {
+        this.exams = exams;
+    }
+
+    public void addExam(Exam exam) {
+        exams.add(exam);
     }
 }
