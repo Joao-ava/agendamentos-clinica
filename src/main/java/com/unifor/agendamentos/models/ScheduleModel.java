@@ -16,6 +16,7 @@ public class ScheduleModel implements Serializable {
 
     public enum Status {
         AGENDADO,
+        INICIADO,
         FINALIZADO,
         CANCELADO
     }
