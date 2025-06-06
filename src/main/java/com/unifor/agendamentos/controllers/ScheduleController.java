@@ -43,6 +43,13 @@ public class ScheduleController {
         return "redirect:/schedules";
     }
 
+    @GetMapping("/{id}/details")
+    public String details(@PathVariable Long id, Model model) {
+        ScheduleModel scheduleDetails = scheduleService.findById(id);
+        model.addAttribute("schedule", scheduleDetails);
+        return "scheduleDetails";
+    }
+
     @GetMapping("/{id}/start")
     public String start(@PathVariable Long id) {
         scheduleService.start(id);
@@ -66,6 +73,12 @@ public class ScheduleController {
     public String updateDate(@PathVariable Long id,
                              @RequestParam("scheduleDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime scheduleDate) {
         scheduleService.updateDate(id, scheduleDate);
+        return "redirect:/schedules";
+    }
+
+    @GetMapping("/{id}/delete")
+    public String delete(@PathVariable Long id) {
+        scheduleService.delete(id);
         return "redirect:/schedules";
     }
 }

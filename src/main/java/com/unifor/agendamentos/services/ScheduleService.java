@@ -58,4 +58,11 @@ public class ScheduleService {
     public ScheduleModel findById(Long id) {
         return scheduleRepository.findById(id).orElseThrow(() -> new RuntimeException("Agendamento não encontrado."));
     }
+
+    public Long delete(Long id) {
+        scheduleRepository.deleteById(id);
+        return id;
+    }
+
+    
 }
