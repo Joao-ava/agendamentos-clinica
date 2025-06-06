@@ -44,8 +44,11 @@
     </nav>
 
     <main class="container">
-      <h2>Listagem de agendamentos</h2>
-      <a class="btn btn-primary" href="/schedules/add">Adicionar</a>
+      <h2>
+        Detalhes do agendamento do paciente
+        <span th:text="${schedule.patient.name}"></span>
+      </h2>
+      <a class="btn btn-primary" href="/schedules">Voltar</a>
       <table class="table table-striped table-bordered mt-2">
         <thead>
           <tr>
@@ -58,14 +61,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr th:each="schedule : ${schedules}">
+          <tr>
             <td th:text="${schedule.id}"></td>
             <td th:text="${schedule.scheduleDate}"></td>
             <td th:text="${schedule.patient.name}"></td>
             <td th:text="${schedule.doctor.name}"></td>
             <td th:text="${schedule.status}"></td>
             <td>
-              <!--                <a th:href="@{/users/edit/{id}(id=${user.id})}" class="btn btn-warning btn-sm">Editar</a>-->
               <a
                 th:if="${schedule.status.name == 'AGENDADO'}"
                 th:href="@{'/schedules/' + ${schedule.id} + '/start'}"
@@ -83,12 +85,6 @@
                 th:href="@{'/schedules/' + ${schedule.id} + '/edit-date'}"
                 class="btn btn-warning btn-sm"
                 >Editar Data</a
-              >
-
-              <a
-                th:href="@{'/schedules/' + ${schedule.id} + '/details'}"
-                class="btn btn-warning btn-sm"
-                >Ver Agendamento</a
               >
               <a
                 th:if="${schedule.status.name != 'FINALIZADO'}"
