@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -66,7 +67,15 @@ public class ScheduleController {
     public String editDateForm(@PathVariable Long id, Model model) {
         ScheduleModel schedule = scheduleService.findById(id);
         model.addAttribute("schedule", schedule);
+        model.addAttribute("users", usersService.list());
         return "schedulesUpdate";
+    }
+
+    @ModelAttribute("scheduleDateFormatted")
+    public String formatDateTime(ScheduleModel schedule) {
+        return schedule.getScheduleDate() != null
+                ? schedule.getScheduleDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"))
+                : "";
     }
 
     @PostMapping("/{id}/update-date")

@@ -35,11 +35,11 @@
 <main class="container">
     <h2>Editar agendamento</h2>
 
-    <form th:action="@{/schedules/save}" method="post" th:object="${schedule}" class="mt-3">
+    <form th:action="@{/schedules/{id}/update-date(id=${schedule.id})}" method="post" th:object="${schedule}" class="mt-3">
 
         <div class="mb-3">
             <label class="form-label">Data:</label>
-            <input type="datetime-local" th:field="*{scheduleDate}" class="form-control" required/>
+            <input type="datetime-local" th:field="*{scheduleDate}" th:value="${scheduleDateFormatted}" class="form-control" required>
         </div>
         <div class="mb-3">
             <label class="form-label">Paciente</label>
