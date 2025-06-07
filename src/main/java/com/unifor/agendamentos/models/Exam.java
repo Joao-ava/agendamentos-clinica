@@ -56,4 +56,9 @@ public class Exam implements Serializable {
     public void setSchedule(ScheduleModel schedule) {
         this.schedule = schedule;
     }
+
+    @Override
+    public String toString() {
+        return "Exam(id=" + id + ", type=" + type + ", result=" + result + ", schedule=" + schedule + ")";
+    }
 }
