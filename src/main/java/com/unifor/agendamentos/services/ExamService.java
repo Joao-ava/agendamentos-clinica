@@ -25,8 +25,11 @@ public class ExamService {
         return exam.get();
     }
 
-    public void update(Exam exam) {
-        examRepository.save(exam);
+    public Exam update(Long id, Exam data) {
+        Exam exam = examRepository.findById(id).get();
+        exam.setType(data.getType());
+        exam.setResult(data.getResult());
+        return examRepository.save(exam);
     }
 
     public void delete(Exam exam) {

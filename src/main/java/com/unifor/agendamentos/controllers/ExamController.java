@@ -42,4 +42,17 @@ class ExamController {
         examService.delete(exam);
         return "redirect:/schedules/" + scheduleId + "/details";
     }
+
+    @GetMapping("/exam/{id}/edit")
+    public String editExamForm(@PathVariable Long id, Model model) {
+        Exam exam = examService.findById(id);
+        model.addAttribute("exam", exam);
+        return "examEdit";
+    }
+
+    @PostMapping("/exam/{id}/edit")
+    public String editExam(@PathVariable Long id, Exam data) {
+        Exam exam = examService.update(id, data);
+        return "redirect:/schedules/" + exam.getSchedule().getId() + "/details";
+    }
 }
