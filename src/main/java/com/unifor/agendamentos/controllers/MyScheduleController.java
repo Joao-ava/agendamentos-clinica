@@ -10,8 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/my-schedules")
 class MyScheduleController {
     private ScheduleService scheduleService;
 
@@ -19,7 +21,7 @@ class MyScheduleController {
         this.scheduleService = scheduleService;
     }
 
-    @GetMapping("/my-schedules")
+    @GetMapping("")
     public String mySchedules(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UsersModel currentUser = (UsersModel) authentication.getPrincipal();
@@ -27,16 +29,30 @@ class MyScheduleController {
         return "mySchedules";
     }
 
-    @GetMapping("/my-schedules/{id}/details")
+    @GetMapping("/{id}/details")
     public String details(@PathVariable Long id, Model model) {
         ScheduleModel scheduleDetails = scheduleService.findById(id);
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UsersModel currentUser = (UsersModel) authentication.getPrincipal();
-        PatientModel patientModel = new PatientModel(currentUser);
-        if (!patientModel.isOwnerSchedule(scheduleDetails)) {
+        if (!currentUserIsOwner(scheduleDetails)) {
             return "redirect:/my-schedules";
         }
         model.addAttribute("schedule", scheduleDetails);
         return "myScheduleDetails";
+    }
+
+    @GetMapping("/{id}/delete")
+    public String delete(@PathVariable Long id) {
+        ScheduleModel scheduleDetails = scheduleService.findById(id);
+        if (!currentUserIsOwner(scheduleDetails)) {
+            return "redirect:/my-schedules";
+        }
+        scheduleService.delete(id);
+        return "redirect:/my-schedules";
+    }
+
+    private boolean currentUserIsOwner(ScheduleModel schedule) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UsersModel currentUser = (UsersModel) authentication.getPrincipal();
+        PatientModel patientModel = new PatientModel(currentUser);
+        return patientModel.isOwnerSchedule(schedule);
     }
 }
