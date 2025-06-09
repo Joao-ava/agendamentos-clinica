@@ -19,7 +19,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/admin/**").hasRole(Role.DOCTOR.name())
+                        .requestMatchers("/schedules/**").hasAnyRole(Role.DOCTOR.name(), Role.RECEPTIONIST.name())
                         .anyRequest().authenticated()
                 )
                 .formLogin(login -> login

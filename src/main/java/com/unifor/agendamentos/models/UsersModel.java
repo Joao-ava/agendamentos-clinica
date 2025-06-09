@@ -36,6 +36,14 @@ public class UsersModel implements Serializable, UserDetails {
         this.passwordHash = passwordHash;
     }
 
+    public UsersModel(String name, String email, String phone, String passwordHash, Role role) {
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.passwordHash = passwordHash;
+        this.role = role;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }

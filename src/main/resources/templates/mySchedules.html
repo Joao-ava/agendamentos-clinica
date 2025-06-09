@@ -71,7 +71,7 @@
               >
               <a
                 th:if="${schedule.status.name != 'FINALIZADO'}"
-                th:href="@{'/schedules/' + ${schedule.id} + '/delete'}"
+                th:href="@{'/my-schedules/' + ${schedule.id} + '/delete'}"
                 class="btn btn-danger btn-sm"
                 >Deletar Agendamento</a
               >
