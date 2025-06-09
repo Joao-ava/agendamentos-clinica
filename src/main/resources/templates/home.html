@@ -21,11 +21,14 @@
                 <li class="nav-item">
                     <a class="nav-link active" href="/">Home</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" th:if="${currentUser.getRole().name() != 'PATIENT'}">
                     <a class="nav-link" href="/users">Usuários</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" th:if="${currentUser.getRole().name() != 'PATIENT'}">
                     <a class="nav-link" href="/schedules">Agendamentos</a>
+                </li>
+                <li class="nav-item" th:if="${currentUser.getRole().name() == 'PATIENT'}">
+                    <a class="nav-link" href="/my-schedules">Meus agendamentos</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/logout">Logout</a>
