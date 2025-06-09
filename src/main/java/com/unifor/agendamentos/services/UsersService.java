@@ -1,5 +1,6 @@
 package com.unifor.agendamentos.services;
 
+import com.unifor.agendamentos.enums.Role;
 import com.unifor.agendamentos.errors.UserNotFound;
 import com.unifor.agendamentos.errors.UsersEmailAlreadyExist;
 import com.unifor.agendamentos.models.UsersModel;
@@ -19,6 +20,14 @@ public class UsersService {
 
     public List<UsersModel> list() {
         return userRepository.findAll();
+    }
+
+    public List<UsersModel> listDoctors() {
+        return userRepository.findAllByRole(Role.DOCTOR);
+    }
+
+    public List<UsersModel> listPatients() {
+        return userRepository.findAllByRole(Role.PATIENT);
     }
 
     public UsersModel add(UsersModel user) throws UsersEmailAlreadyExist {

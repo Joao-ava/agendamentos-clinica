@@ -1,6 +1,7 @@
 package com.unifor.agendamentos.services;
 
 import com.unifor.agendamentos.models.ScheduleModel;
+import com.unifor.agendamentos.models.UsersModel;
 import com.unifor.agendamentos.repositories.ScheduleRepository;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,10 @@ public class ScheduleService {
     public ScheduleModel add(ScheduleModel schedule) {
         schedule.setStatus(ScheduleModel.Status.AGENDADO);
         return scheduleRepository.save(schedule);
+    }
+
+    public List<ScheduleModel> findAllByPatient(UsersModel patient) {
+        return scheduleRepository.findAllByPatient(patient);
     }
 
     public ScheduleModel start(Long id) {

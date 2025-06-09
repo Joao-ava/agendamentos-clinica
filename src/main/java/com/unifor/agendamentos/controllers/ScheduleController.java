@@ -35,6 +35,8 @@ public class ScheduleController {
     public String addForm(Model model) {
         model.addAttribute("schedule", new ScheduleModel());
         model.addAttribute("users", usersService.list());
+        model.addAttribute("doctors", usersService.listDoctors());
+        model.addAttribute("patients", usersService.listPatients());
         return "schedulesAdd";
     }
 
@@ -68,6 +70,8 @@ public class ScheduleController {
         ScheduleModel schedule = scheduleService.findById(id);
         model.addAttribute("schedule", schedule);
         model.addAttribute("users", usersService.list());
+        model.addAttribute("doctors", usersService.listDoctors());
+        model.addAttribute("patients", usersService.listPatients());
         return "schedulesUpdate";
     }
 

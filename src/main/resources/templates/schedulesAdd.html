@@ -47,13 +47,13 @@
         <div class="mb-3">
             <label class="form-label">Paciente</label>
             <select th:field="*{patient}">
-                <option th:each="u : ${users}" th:value="${u.id}" th:text="${u.name}" class="form-control"></option>
+                <option th:each="u : ${patients}" th:value="${u.id}" th:text="${u.name}" class="form-control"></option>
             </select>
         </div>
         <div class="mb-3">
             <label class="form-label">Doctor</label>
             <select th:field="*{doctor}">
-                <option th:each="u : ${users}"
+                <option th:each="u : ${doctors}"
                         th:value="${u.id}"
                         th:text="${u.name}" class="form-control"></option>
             </select>
